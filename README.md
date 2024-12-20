@@ -1,4 +1,4 @@
-## Telecom Frontend
+
 # Overview
 This project is the frontend application for a telecom startup that uses ReactJS, TailwindCSS, and a manually implemented chatbot to interact with the ElizaBotController in the backend. The goal of this application is to automate customer support, monitor network performance, and engage customers through various channels. The frontend communicates with the backend via network calls, allowing the chatbot to provide assistance to customers in real-time.
 The application features a customer support AI chatbot, a dashboard to monitor network performance, and Discord integration to offer customers seamless interactions directly from their preferred communication platform.
