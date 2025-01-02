@@ -43,7 +43,7 @@ const TicketTab = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = editMode ? `${baseUrl}/tickets/${selectedTicket._id}` : `${baseUrl}/tickets`;
+      const url = editMode ? `${baseUrl}/tickets/${selectedTicket.ticketId}` : `${baseUrl}/tickets`;
       const method = editMode ? "PUT" : "POST";
       const response = await fetch(url, {
         method,
