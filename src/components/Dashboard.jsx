@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 //import { useUser } from '../utils/UserContext'; // Correct import for user context
 import BotTab from './BotTab';
 import ChatbotModal from '../utils/ChatbotModal';
-//import baseUrl from '../utils/BaseUrl';
+import { useNavigate } from 'react-router-dom'; // Assuming you use react-router-dom for navigation
 
 const Dashboard = () => {
  // const { user } = useUser(); // Get both user and setUser from context
@@ -17,6 +17,8 @@ const Dashboard = () => {
   const [currentTab, setCurrentTab] = useState('ticket');
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isChatbotOpen, setIsChatbotOpen] = useState(false);
+  const navigate = useNavigate(); // For navigation
+
   //const [role, setRole] = useState('user');
 
   //useEffect(() => {
@@ -28,6 +30,12 @@ const Dashboard = () => {
   const handleModalClose = () => setIsModalOpen(false);
   ///const handleChatbotToggle = () => setIsChatbotOpen(!isChatbotOpen);
   const handleTabClick = (tab) => setCurrentTab(tab);
+
+  const handleLogout = () => {
+    // Add your logout logic here, e.g., clearing user data
+    navigate('/'); // Redirect to the SignIn screen
+  };
+
   
  
   return (
@@ -53,6 +61,15 @@ const Dashboard = () => {
          {/* {role === 'admin' && <Tab icon="👥" label="Eliza" onClick={() => handleTabClick('eliza')} isCollapsed={isSidebarCollapsed} />}*/}
           <Tab icon="💬" label="Eliza" onClick={() => handleTabClick('eliza')} isCollapsed={isSidebarCollapsed} />
         </div>
+
+        <button
+          className="mt-auto flex items-center space-x-2 text-red-500 cursor-pointer"
+          onClick={handleLogout}
+        >
+          <span>🚪</span>
+          <span className={`transition-all duration-300 ${isSidebarCollapsed ? 'opacity-0' : 'opacity-100'}`}>Logout</span>
+        </button>
+
       </div>
 
       {/* Main Content */}
