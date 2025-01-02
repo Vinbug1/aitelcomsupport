@@ -66,5 +66,3 @@ We welcome contributions! If you would like to contribute to the project:
  * Push to the branch (git push origin feature-name).
  * Open a pull request.
 
-#Contact
-For any inquiries, please reach out to `vincentwilliamsjohn9626@gmail.com`.
