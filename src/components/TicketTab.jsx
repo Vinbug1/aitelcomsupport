@@ -66,12 +66,12 @@ const TicketTab = () => {
     }
   };
 
-  const handleEdit = (ticket) => {
-    setSelectedTicket(ticket);
-    setNewTicket(ticket);
-    setEditMode(true);
-    setIsModalOpen(true);
-  };
+  // const handleEdit = (ticket) => {
+  //   setSelectedTicket(ticket);
+  //   setNewTicket(ticket);
+  //   setEditMode(true);
+  //   setIsModalOpen(true);
+  // };
 
   const handleDelete = async () => {
     if (!selectedTicket || !selectedTicket.ticketId) {
@@ -157,9 +157,9 @@ const TicketTab = () => {
               <td className="border-b p-2 text-left">{ticket.description}</td>
               <td className="border-b p-2 text-left">{ticket.status}</td>
               <td className="border-b p-2 text-left">
-                <button className="bg-yellow-500 text-white px-2 py-1 mr-2 rounded" onClick={() => handleEdit(ticket)}>
+                {/* <button className="bg-yellow-500 text-white px-2 py-1 mr-2 rounded" onClick={() => handleEdit(ticket)}>
                   Edit
-                </button>
+                </button> */}
                 <button className="bg-red-500 text-white px-2 py-1 mr-2 rounded" onClick={() => openDeleteModal(ticket)}>Delete</button>
               </td>
             </tr>
