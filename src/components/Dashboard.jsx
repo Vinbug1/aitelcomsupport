@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/outline';
 import TicketTab from './TicketTab';
 import UsersTab from './UsersTab';
@@ -6,26 +6,26 @@ import BillsTab from './BillsTab';
 import DiscordTab from './DiscordTab';
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
-//import { useUser } from '../utils/UserContext'; // Correct import for user context
+import { useUser } from '../utils/UserContext'; // Correct import for user context
 import BotTab from './BotTab';
 import ChatbotModal from '../utils/ChatbotModal';
 import { useNavigate } from 'react-router-dom'; // Assuming you use react-router-dom for navigation
 
 const Dashboard = () => {
- // const { user } = useUser(); // Get both user and setUser from context
+ const { user } = useUser(); // Get both user and setUser from context
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentTab, setCurrentTab] = useState('ticket');
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isChatbotOpen, setIsChatbotOpen] = useState(false);
   const navigate = useNavigate(); // For navigation
 
-  //const [role, setRole] = useState('user');
+  const [role, setRole] = useState('user');
 
-  //useEffect(() => {
-   // if (user) {
-    //  setRole(user.role); // Set the role based on user data
-   // }
-  //}, [user]);
+  useEffect(() => {
+   if (user) {
+     setRole(user.role); // Set the role based on user data
+   }
+  }, [user]);
 
   const handleModalClose = () => setIsModalOpen(false);
   ///const handleChatbotToggle = () => setIsChatbotOpen(!isChatbotOpen);
@@ -53,13 +53,14 @@ const Dashboard = () => {
         {/* Tabs */}
         <div className="space-y-6 mt-4">
           <Tab icon="📑" label="Ticket" onClick={() => handleTabClick('ticket')} isCollapsed={isSidebarCollapsed} />
-        {/*  {role === 'admin' && <Tab icon="👥" label="Users" onClick={() => handleTabClick('users')} isCollapsed={isSidebarCollapsed} />}*/}
-          <Tab icon="👥" label="Users" onClick={() => handleTabClick('users')} isCollapsed={isSidebarCollapsed} />
+         {role === 'admin' && <Tab icon="👥" label="Users" onClick={() => handleTabClick('users')} isCollapsed={isSidebarCollapsed} />}
+          {/* <Tab icon="👥" label="Users" onClick={() => handleTabClick('users')} isCollapsed={isSidebarCollapsed} /> */}
 
           <Tab icon="💰" label="Bills" onClick={() => handleTabClick('bills')} isCollapsed={isSidebarCollapsed} />
+         {/* {role === 'admin' && <Tab icon="💬" label="Discord" onClick={() => handleTabClick('discord')} isCollapsed={isSidebarCollapsed} />} */}
           <Tab icon="💬" label="Discord" onClick={() => handleTabClick('discord')} isCollapsed={isSidebarCollapsed} />
-         {/* {role === 'admin' && <Tab icon="👥" label="Eliza" onClick={() => handleTabClick('eliza')} isCollapsed={isSidebarCollapsed} />}*/}
-          <Tab icon="💬" label="Eliza" onClick={() => handleTabClick('eliza')} isCollapsed={isSidebarCollapsed} />
+         {role === 'admin' && <Tab icon="💬" label="Eliza" onClick={() => handleTabClick('eliza')} isCollapsed={isSidebarCollapsed} />}
+          {/* <Tab icon="💬" label="Eliza" onClick={() => handleTabClick('eliza')} isCollapsed={isSidebarCollapsed} /> */}
         </div>
 
         <button

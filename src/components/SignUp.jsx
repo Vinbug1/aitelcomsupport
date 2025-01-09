@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 const SignUpForm = () => {
   const [formData, setFormData] = useState({
-    name: '',
+    username: '',
     email: '',
     password: '',
-    role: '', // Added role to the state
+    role: 'client', // Added role to the state
   });
   const [errorMessage, setErrorMessage] = useState(null);
   const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
@@ -21,35 +21,38 @@ const SignUpForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+  
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-
+  
     const raw = JSON.stringify(formData);
-
+  
     const requestOptions = {
       method: "POST",
       headers: myHeaders,
       body: raw,
-      redirect: "follow"
+      redirect: "follow",
     };
-
+  
     fetch(`${baseUrl}/users/register`, requestOptions)
-      .then((response) => {
+      .then(async (response) => {
+        const result = await response.json();
         if (!response.ok) {
-          throw new Error("Registration failed");
+          console.error("Server error:", result); // Log the error response
+          throw new Error(result.error || "Registration failed");
         }
-        return response.json();
+        return result;
       })
       .then((result) => {
         console.log("Registration Successful:", result);
-        // Navigate to the login page
-        navigate("/login");
+        navigate("/");
       })
       .catch((error) => {
         console.error("Error:", error);
-        setErrorMessage("Registration failed. Please try again.");
+        setErrorMessage(error.message); // Show specific error
       });
   };
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -76,16 +79,16 @@ const SignUpForm = () => {
             {/* Name Field */}
             <div className="mb-4">
               <label
-                htmlFor="name"
+                htmlFor="username"
                 className="block text-gray-700 font-semibold mb-2"
               >
                 Name
               </label>
               <input
                 type="text"
-                id="name"
-                name="name"
-                value={formData.name}
+                id="username"
+                name="username"
+                value={formData.username}
                 onChange={handleChange}
                 placeholder="Enter your name"
                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -190,8 +193,8 @@ const SignUpForm = () => {
                 <option value="" disabled>
                   Select your role
                 </option>
-                <option value="user">User</option>
-                <option value="admin">Admin</option>
+                <option value="client">Client</option>
+                {/* <option value="admin">Admin</option> */}
               </select>
             </div>
 
