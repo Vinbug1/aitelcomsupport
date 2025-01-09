@@ -107,6 +107,9 @@ const SignInForm = () => {
       // Get network and region information
       const networkInfo = getNetworkInfo();
       const regionInfo = await getRegionInfo();
+      // Log the information in the console
+    //console.log("Network Information:", networkInfo);
+    //console.log("Region Information:", regionInfo);
 
       // Combine all data
       const payload = {
